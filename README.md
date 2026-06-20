@@ -42,22 +42,7 @@ docker compose up --build
 
 Mở `http://localhost:3000`.
 
-## Chạy trên server trường
 
-```bash
-git clone <repo-url>
-cd Open-MT
-cp .env.example .env
-docker compose up --build
-```
-
-Server GPU cần cài NVIDIA driver và NVIDIA Container Toolkit. Compose đang bật `gpus: all` cho backend.
-
-Kiểm tra GPU trong container:
-
-```bash
-docker exec -it <backend-container> nvidia-smi
-```
 
 ## API
 
