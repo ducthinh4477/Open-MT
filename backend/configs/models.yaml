@@ -1,0 +1,18 @@
+models:
+  - id: qwen3_0_6b_phomt_250k
+    name: Qwen3 0.6B PhoMT 250K
+    hf_id: dinhxuanhuy/Qwen3-0.6B-PhoMT-250K
+    default: true
+    load_in_4bit: false
+    torch_dtype: float16
+    max_input_chars: 5000
+    description: Fast default demo model
+
+  - id: qwen2_5_3b_phomt_250k
+    name: Qwen2.5 3B PhoMT 250K
+    hf_id: dinhxuanhuy/Qwen2.5-3B-PhoMT-250k
+    default: false
+    load_in_4bit: true
+    torch_dtype: float16
+    max_input_chars: 5000
+    description: Larger model, use 4-bit on 8GB GPU
