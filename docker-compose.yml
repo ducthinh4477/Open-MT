@@ -1,10 +1,28 @@
 services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      HF_HOME: ${HF_HOME:-/models/huggingface}
+      TRANSFORMERS_CACHE: ${TRANSFORMERS_CACHE:-/models/huggingface}
+      DEFAULT_MODEL_ID: ${DEFAULT_MODEL_ID:-qwen3_0_6b_phomt_250k}
+    volumes:
+      - hf_cache:/models/huggingface
+    gpus: all
+
   frontend:
     build:
       context: ./frontend
       args:
-        VITE_API_BASE_URL: /api
-    image: open-mt_frontend:latest
-    container_name: open-mt_frontend_1
-    network_mode: host
-    restart: unless-stopped
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-}
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  hf_cache:
