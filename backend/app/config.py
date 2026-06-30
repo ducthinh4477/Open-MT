@@ -6,7 +6,8 @@ BACKEND_DIR = Path(__file__).resolve().parents[1]
 MODEL_CONFIG_PATH = Path(
     os.getenv("MODEL_CONFIG_PATH", BACKEND_DIR / "configs" / "models.yaml")
 )
-DEFAULT_MODEL_ID = os.getenv("DEFAULT_MODEL_ID", "qwen3_0_6b_phomt_250k")
+DEFAULT_MODEL_ID = os.getenv("DEFAULT_MODEL_ID", "qwen2_5_3b_phomt_500k_multi")
+MODEL_CACHE_SIZE = max(1, int(os.getenv("MODEL_CACHE_SIZE", "1")))
 
 CORS_ORIGINS = [
     origin.strip()

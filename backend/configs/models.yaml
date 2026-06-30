@@ -1,18 +1,111 @@
 models:
   - id: qwen3_0_6b_phomt_250k
     name: Qwen3 0.6B PhoMT 250K
+    backend: hf_causal_lm
     hf_id: dinhxuanhuy/Qwen3-0.6B-PhoMT-250K
-    default: true
+    default: false
     load_in_4bit: false
     torch_dtype: float16
     max_input_chars: 5000
     description: Fast default demo model
+    supported_pairs:
+      - en-vi
 
   - id: qwen2_5_3b_phomt_250k
     name: Qwen2.5 3B PhoMT 250K
+    backend: hf_causal_lm
     hf_id: dinhxuanhuy/Qwen2.5-3B-PhoMT-250k
     default: false
     load_in_4bit: true
     torch_dtype: float16
     max_input_chars: 5000
     description: Larger model, use 4-bit on 8GB GPU
+    supported_pairs:
+      - en-vi
+
+  - id: qwen2_5_3b_phomt_500k_multi
+    name: Qwen2.5 3B PhoMT 500K Multi
+    backend: hf_causal_lm
+    hf_id: dinhxuanhuy/Qwen2.5-3B-PhoMT-500kMulti
+    revision: e1db5b2316aa8c684bd06b95910a3c75fdf13858
+    default: true
+    load_in_4bit: true
+    torch_dtype: float16
+    max_input_chars: 5000
+    description: Multidirectional Qwen2.5 3B PhoMT 500K model
+    prompt_mode: auto_detect
+    system_prompt: >-
+      You are a professional Vietnamese-English translation assistant.
+      Automatically detect whether the input is Vietnamese or English and
+      translate it into the other language. Output only the translation.
+    supported_pairs:
+      - en-vi
+      - vi-en
+
+  - id: llama3_2_1b_phomt_250k
+    name: Llama 3.2 1B PhoMT 250K
+    backend: hf_causal_lm
+    hf_id: dinhxuanhuy/llama-3.2-1B-PhoMT-250k
+    default: false
+    load_in_4bit: false
+    torch_dtype: float16
+    max_input_chars: 5000
+    description: 1B Llama PhoMT fine-tuned model
+    supported_pairs:
+      - en-vi
+
+  - id: local_bpe_transformer_envi
+    name: Local BPE Transformer EN-VI
+    backend: local_transformer
+    hf_id: ""
+    default: false
+    load_in_4bit: false
+    torch_dtype: float32
+    max_input_chars: 5000
+    description: Local Transformer checkpoint from Multiple files with Beam Search
+    weight_path: "/home/sysadmin/Open-MT/Multiple files/weight/best-spm-bpe-transformer-envi.pt"
+    tokenizer_path: "/home/sysadmin/Open-MT/Multiple files/BPE_10k/envi_bpe.model"
+    supported_pairs:
+      - en-vi
+
+  - id: local_bpe25_transformer_best_bleu_envi
+    name: Local BPE 25K Transformer Best BLEU EN-VI
+    backend: local_transformer
+    hf_id: ""
+    default: false
+    load_in_4bit: false
+    torch_dtype: float32
+    max_input_chars: 5000
+    description: Local 25K Transformer checkpoint with Beam Search, best BLEU 16.63
+    weight_path: "/home/sysadmin/Open-MT/Multiple files/weight/best-bleu-spm-bpe-transformer-envi_5_1.pt"
+    tokenizer_path: "/home/sysadmin/Open-MT/Multiple files/BPE_25K/envi_bpe_25k.vocab"
+    supported_pairs:
+      - en-vi
+
+  - id: local_bpe25_transformer_best_loss_envi
+    name: Local BPE 25K Transformer Best Loss EN-VI
+    backend: local_transformer
+    hf_id: ""
+    default: false
+    load_in_4bit: false
+    torch_dtype: float32
+    max_input_chars: 5000
+    description: Local 25K Transformer checkpoint with Beam Search, best valid loss 2.351
+    weight_path: "/home/sysadmin/Open-MT/Multiple files/weight/best-loss-spm-bpe-transformer-envi_5_1_2.pt"
+    tokenizer_path: "/home/sysadmin/Open-MT/Multiple files/BPE_25K/envi_bpe_25k.vocab"
+    supported_pairs:
+      - en-vi
+
+  - id: local_bilstm_envi
+    name: Local BiLSTM EN-VI
+    backend: local_bilstm
+    hf_id: ""
+    default: false
+    load_in_4bit: false
+    torch_dtype: float32
+    max_input_chars: 5000
+    description: Local BiLSTM checkpoint from Multiple files with Beam Search
+    weight_path: "/home/sysadmin/Open-MT/Multiple files/weight/best_full_bilstm_translation.pt"
+    tokenizer_path: "/home/sysadmin/Open-MT/Multiple files/BPE_10k/envi_bpe.model"
+    supported_pairs:
+      - en-vi
